@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -50,7 +50,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		os.Exit(0)
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	var data map[string]interface{}
 	json.Unmarshal(body, &data)
 	joke := data["joke"]
